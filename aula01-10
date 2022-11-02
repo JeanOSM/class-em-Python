@@ -1,0 +1,28 @@
+
+class Data():
+    def __init__(self):
+        self.dia = 0
+        self.mes = 0
+        self.ano = 0
+        
+class Professor:
+    def __init__(self):
+        self.nome = ""
+        self.idade = 0
+        self.salario = 0
+        self.nascimento = Data()
+        
+p=Professor()
+p.nome = str(input("Nome:"))
+p.idade = int(input("Idade:"))   
+p.salario = float(input("Salario:"))
+p.nascimento.dia = int(input("Dia:"))
+p.nascimento.mes = int(input("Mês:"))
+p.nascimento.ano = int(input("ano:"))
+
+def exibirProfessor(p):
+
+    print("Nome:",p.nome ,"\nIdade:",p.idade, "\nSalario:", p.salario, "\nNascimento:", p.nascimento.dia,"/",p.nascimento.mes,"/",p.nascimento.ano)    
+ 
+exibirProfessor(p)
+    
