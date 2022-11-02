@@ -26,3 +26,40 @@ def exibirProfessor(p):
  
 exibirProfessor(p)
     
+
+import mysql.connector
+
+banco = mysql.connector.connect(
+    host = "localhost",  #local dizer o ip 127.0.0.1
+    user = "root", #Usuario
+    password = "", #Senha
+    database = "algoritmos" #Nome do banco de dados
+    
+)
+#Conexão com o banco de dados
+
+if(banco):
+    print ("Conectado com sucessso!")
+else:
+    print("Erro na conxão!")
+
+materia = input("Insita a materia:")
+carga = int(input("Insira a carga horária:"))
+prof = input("Insira o nome do professor:")
+dados = banco.cursor()
+sql = "INSERT INTO disciplinas VALUES (%s,%s,%s,%s)"
+valores1 = ( None,"Algoritmos", 160, "Rafael")
+#valores2 = (None, "Banco de Dados", 160, "Hélio")
+#valores3 = (None, "Matematica", 160, "Azuzinho")
+valores4 = (None, materia, carga, prof)
+
+#dados.execute(sql,valores1)
+# dados.execute(sql, valores2)
+# dados.execute(sql, valores3)
+dados.execute(sql, valores4)
+
+banco.commit()
+dados.close()
+
+banco.close()
+
