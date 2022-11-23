@@ -63,3 +63,87 @@ dados.close()
 
 banco.close()
 
+#Aula22/11
+DROP DATABASE IF EXISTS algoritmos
+CREATE DATABASE algoritmos;
+USE algoritmos;
+CREATE TABLE disciplina(
+cod INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR (50) NOT NULL ,
+ch INT NOT NULL,
+professor VARCHAR (50) NOT NULL,
+chr FLOAT NOT NULL
+
+);
+
+import mysql.connector
+
+banco = mysql.connector.connect(
+    host="localhost",  # local dizer o ip 127.0.0.1
+    user="root",  # Usuario
+    password="",  # Senha
+    database="algoritmos"  # Nome do banco de dados
+
+)
+#Conexão com o banco de dados
+
+if(banco):
+    print("Conectado com sucessso!")
+else:
+    print("Erro na conxão!")
+
+
+
+class disciplina:
+    def __init__ (self):
+        self.nome = ""
+        self.cargaH = 0
+        self.professor = ""
+        self.cargaHR = 0.0
+
+
+dados = banco.cursor()
+def salvar (a):
+    
+    sql = "INSERT INTO disciplina VALUES(%s,%s,%s,%s,%s)"
+    valor1= (None,a.nome,a.cargaH,a.professor,a.cargaHR)
+    dados.execute(sql,valor1)
+    banco.commit
+
+def lerDados():
+    ler = "SELECT * FROM disciplina"
+    dados.execute(ler)
+    return ler
+
+
+
+print ("_________Disciplinas_______")
+
+cadastro = disciplina()
+cadastro.nome = input("Insira a disciplina:")
+cadastro.cargaH = int(input("Insira a carga horaria:"))
+cadastro.professor = input("Insira o nome do professor:")
+cadastro.cargaHR = (cadastro.cargaHR * 50)/60
+
+sv = input("Deseja salvar? S/N")
+
+if (sv== 'S'):
+    salvar(cadastro)
+    ver= input("Deseja ver o cadastro? S/N:")
+    if(ver =='S'):
+        x = lerDados()
+        print(x)
+    else:
+        print("Finalizado!")
+
+
+else:
+    print("Finalizado!")
+
+dados.close()
+banco.close()
+
+    
+
+
+
